@@ -4,11 +4,11 @@
 * This version is made by Dayan Jayasuriya, Nicki Lindstrom,
 * and Riley Schaaf.
 * Used for Assignment 6
-* Last updated 28/FEB/2018 18:49 by Dayan
+* Last updated 02/Feb/2018 21:15 by Riley
 */
 public class ChequingAccount extends BankAccount {
   private double transactionFee;
-  private double overdraftAmount = 0;
+  private double overdraftAmount;
 
   /**
   * Constructors
@@ -41,24 +41,25 @@ public class ChequingAccount extends BankAccount {
     transactionFee = fee;
   }
   public void setOverdraftAmount(double amount) {
-    overdraftAmount = amount;
+    overdraftAmount = -amount;
   }
 
   /**
   * Withdraw method that overrides the withdraw method in BankAccount
   * Allows for negative withdrawls
   */
-  @Override
-  public void withdraw(double amountWidthdraw) {
-    double currentFee = 0;
-    double minimumBalance = 0;
+  public void withdraw(double amountwithdraw) {
+
     double currentBalance = getBalance();
-    super.withdraw(amountWidthdraw);
-    double newBalance = getBalance();
-    if ((currentBalance == newBalance)) {
-      if ((currentBalance - amountWidthdraw) >= getOverdraftAmount()){
-        setBalance(currentBalance - (amountWidthdraw + getTransactionFee()));
+    //if after withdrawl the balance is above 0, go ahead and withdraw the money
+    if ((currentBalance - amountwithdraw) >=0.0) {
+        setBalance(currentBalance - amountwithdraw);
       }
-    }
+    /* if after withdrawl the balance is below 0, check the balance does not violate
+    the overdraft amount. If it does not, allow the withdrawl and impose the
+    fee*/
+    else if ((currentBalance - amountwithdraw) >= getOverdraftAmount()){
+        setBalance(currentBalance - (amountwithdraw + getTransactionFee()));
+      }
   }
 }
