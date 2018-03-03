@@ -8,7 +8,7 @@
 */
 public class ChequingAccount extends BankAccount {
   private double transactionFee;
-  private double overdraftAmount;
+  private double overdraftAmount = 0;
 
   /**
   * Constructors
