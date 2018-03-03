@@ -73,20 +73,9 @@ public class BankAccount {
   */
   public void withdraw(double newWithdraw) {
     double minimumBalance = 0;
-    //This try block catches an Exception caused by the user not entering an integer.
-    try {
       // if statement to check the withdrawl does not put the account into overdraft.
-      if ((balance - newWithdraw) >= (minimumBalance)) {
-        balance -= newWithdraw;
-      }
-
-      else {
-        System.out.println("You have reached your overdraft limit.");
-      }
-    }
-
-    catch (InputMismatchException e) {
-      System.out.println("You did not enter a number to withdraw.");
+    if ((getBalance() - newWithdraw) >= (minimumBalance)) {
+      setBalance(getBalance() - newWithdraw);
     }
   }
 

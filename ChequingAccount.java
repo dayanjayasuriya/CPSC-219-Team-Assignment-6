@@ -48,19 +48,17 @@ public class ChequingAccount extends BankAccount {
   * Withdraw method that overrides the withdraw method in BankAccount
   * Allows for negative withdrawls
   */
-  public void withdraw(double amount) {
-    double currentBalance = getBalance();
+  @Override
+  public void withdraw(double amountWidthdraw) {
+    double currentFee = 0;
     double minimumBalance = 0;
-    double newBalance;
-    if ((currentBalance - amount) <= minimumBalance) {
-      if ((currentBalance - amount) >= getOverdraftAmount()){
-        newBalance = currentBalance - amount - getTransactionFee();
-        setBalance(newBalance);
+    double currentBalance = getBalance();
+    super.withdraw(amountWidthdraw);
+    double newBalance = getBalance();
+    if ((currentBalance == newBalance)) {
+      if ((currentBalance - amountWidthdraw) >= getOverdraftAmount()){
+        setBalance(currentBalance - (amountWidthdraw + getTransactionFee()));
       }
-    }
-    else {
-      newBalance = currentBalance - amount;
-      setBalance(newBalance);
     }
   }
 }
